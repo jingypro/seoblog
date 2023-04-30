@@ -64,7 +64,7 @@ const Index = () => {
                   <h2 className="text-shadow text-center h1">Tutorials</h2>
                 </div>
                 <div className="back text-center">
-                  <Link href="/categories/tutotrials" legacyBehavior>
+                  <Link href="/categories/tutorials" legacyBehavior>
                     <a>
                       <h3 className="h1">Tutorials</h3>
                     </a>
