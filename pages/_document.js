@@ -38,6 +38,7 @@ class MyDocument extends Document {
             src="https://www.googletagmanager.com/gtag/js?id=G-XY0BSXZND6"
           />
           <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+          <script src="https://apis.google.com/js/api.js"></script>
         </Head>
         <body>
           <Main />
