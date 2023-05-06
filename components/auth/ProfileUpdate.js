@@ -72,37 +72,44 @@ const ProfileUpdate = () => {
   //   };
 
   const handleChange = (name) => (e) => {
-    const value = name === "photo" ? e.target.files[0] : e.target.value;
-    setValues((prevValues) => {
-      const updatedValues = {
+    if (name === "photo") {
+      const file = e.target.files[0];
+      setValues((prevValues) => ({
         ...prevValues,
-        [name]: value,
+        [name]: file,
         error: false,
         success: false,
-      };
+      }));
 
-      // Update userFormData here
-      let updatedUserData = new FormData();
-      updatedUserData.set(
-        "username",
-        name === "username" ? value : prevValues.username
-      );
-      updatedUserData.set("name", name === "name" ? value : prevValues.name);
-      updatedUserData.set("email", name === "email" ? value : prevValues.email);
-      updatedUserData.set("about", name === "about" ? value : prevValues.about);
-      updatedUserData.set(
-        "password",
-        name === "password" ? value : prevValues.password
-      );
-      if (name === "photo") {
-        updatedUserData.set("photo", value);
-      }
+      setValues((prevValues) => {
+        const updatedUserData = prevValues.userData;
+        updatedUserData.set(name, file);
 
-      return {
-        ...updatedValues,
-        userData: updatedUserData,
-      };
-    });
+        return {
+          ...prevValues,
+          userData: updatedUserData,
+        };
+      });
+    } else {
+      const value = e.target.value;
+      setValues((prevValues) => {
+        const updatedValues = {
+          ...prevValues,
+          [name]: value,
+          error: false,
+          success: false,
+        };
+
+        // Update userFormData here
+        const updatedUserData = prevValues.userData;
+        updatedUserData.set(name, value);
+
+        return {
+          ...updatedValues,
+          userData: updatedUserData,
+        };
+      });
+    }
   };
 
   //   const handleSubmit = (e) => {
